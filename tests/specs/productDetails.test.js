@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { createDriver } = require('../config/setup');
+const { createDriver } = require('../config/setup'); // Assuming your driver setup is in this file
 const { By, until } = require('selenium-webdriver');
 
 describe('Juice Shop Product Details Tests', function() {
@@ -41,7 +41,6 @@ describe('Juice Shop Product Details Tests', function() {
         until.elementLocated(By.css('mat-grid-tile:first-child')),
         5000 // Adjust timeout as needed
       );
-      await firstProductTile.click();
 
     // Click on the first product tile
     await firstProductTile.click();
