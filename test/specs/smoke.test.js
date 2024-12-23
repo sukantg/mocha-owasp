@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { createDriver } = require('../config/setup');
-const LoginPage = require('../pages/login.page');
-
+const LoginPage = require('../pages/smoke.page');
+// This test checks if the website is up and running
 describe('Login Page Tests', function() {
   let driver;
   let loginPage;
@@ -9,6 +9,23 @@ describe('Login Page Tests', function() {
   before(async function() {
     driver = await createDriver();
     loginPage = new LoginPage(driver);
+
+    // Dismiss welcome banner if it appears
+    try {
+      const dismissButton = await driver.findElement(By.css('button[aria-label="Close Welcome Banner"]'));
+      await dismissButton.click();
+    } catch (error) {
+      console.log('No welcome banner displayed.');
+    }
+
+    // Dismiss cookie message if it appears
+    try {
+      const dismissCookieButton = await driver.findElement(By.css('a[aria-label="dismiss cookie message"]'));
+      await dismissCookieButton.click();
+    } catch (error) {
+      console.log('No cookie message displayed.');
+    }
+    
   });
 
   after(async function() {
@@ -17,22 +34,6 @@ describe('Login Page Tests', function() {
 
   beforeEach(async function() {
     await loginPage.navigate();
-
-    // Dismiss welcome banner popup if it appears
-    try {
-      const dismissBannerButton = await driver.findElement({ css: 'button[aria-label="Close Welcome Banner"]' });
-      await dismissBannerButton.click();
-    } catch (error) {
-      console.log('No welcome banner displayed.');
-    }
-
-    // Dismiss cookie message if it appears
-    try {
-      const dismissCookieButton = await driver.findElement({ css: 'a[aria-label="dismiss cookie message"]' });
-      await dismissCookieButton.click();
-    } catch (error) {
-      console.log('No cookie message displayed.');
-    }
   });
 
   it('should display error message with invalid credentials', async function() {
