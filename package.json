@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Frontend automation tests for OWASP Juice Shop",
   "scripts": {
-    "test": "mocha 'test/**/*.js' --timeout 10000"
+    "test": "mocha 'tests/**/*.js' --timeout 10000"
   },
   "dependencies": {
     "chai": "^4.3.7",
