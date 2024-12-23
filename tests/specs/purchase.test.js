@@ -75,7 +75,8 @@ describe('Product Purchase Tests', function() {
     }
 
     const basketButton = await driver.findElement(By.xpath("//span[contains(text(), 'Your Basket')]")); 
-    expect(basketButton).to.exist; // Assert that the basket button exists
+    // Assert that the basket button exists
+    expect(basketButton).to.exist; 
     await basketButton.click();
 
     // Get initial total price
