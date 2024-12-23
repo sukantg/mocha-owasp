@@ -135,7 +135,7 @@ describe('Product Purchase Tests', function() {
     await firstAddress.click();
 
     // Find and click the "Continue" button
-    const continueButton = await driver.findElement(By.xpath('//button[text()="Continue"]')); /
+    const continueButton = await driver.findElement(By.xpath('//button[text()="Continue"]'));
     await continueButton.click();
 
     // select one day delivery radio button
