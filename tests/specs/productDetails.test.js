@@ -69,7 +69,7 @@ describe('Juice Shop Product Details Tests', function() {
     await reviewsButton.click();
 
     // Wait for reviews to be visible
-    await driver.sleep(2000); // Wait for 2 seconds as requested
+    await driver.sleep(2000); // Wait for 2 seconds
 
     // Close the product dialog
     const closeButton = await driver.findElement(
