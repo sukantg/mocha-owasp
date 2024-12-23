@@ -7,8 +7,7 @@ describe('Login Functionality Tests', function() {
 
   before(async function() {
     driver = await createDriver();
-
-
+    
     // Dismiss welcome banner if it appears
     try {
         const dismissButton = await driver.findElement(By.css('button[aria-label="Close Welcome Banner"]'));
@@ -35,8 +34,8 @@ describe('Login Functionality Tests', function() {
     await driver.get('https://juice-shop.herokuapp.com/#/login');
 
     // Replace with your actual credentials before running the test
-    const username = 'zuki.sfo@gmail.com';
-    const password = 'test1234';
+    const username = 'workingmail@gmail.com';
+    const password = 'workingname';
 
     // Find the username field and enter username
     const usernameField = await driver.findElement(By.id('email')); 
@@ -50,15 +49,19 @@ describe('Login Functionality Tests', function() {
     const submitButton = await driver.findElement(By.id('loginButton')); 
     await submitButton.click();
 
-    // Wait for the successful login indication (e.g., presence of a specific element)
+    // Wait for the successful login indication and assert that the "Your Basket" element is visible
     const successElement = await driver.wait(
-      until.elementLocated(By.css('.mat-toolbar-single-row')), // Adjust selector as needed
+      until.elementLocated(By.xpath("//span[contains(text(), 'Your Basket')]")), 
       5000
     );
 
-    // Assert successful login (e.g., check for welcome message)
-    const welcomeMessage = await successElement.getText();
-    expect(welcomeMessage).to.include('Welcome'); 
+    // Get the "Add to Basket" buttons for the first 5 products
+    const addButtons = await driver.findElements(By.css('.btn-basket')); 
 
+    // Add the first 5 products to the basket
+    for (let i = 0; i < 5; i++) {
+      await addButtons[i].click();
+
+    }
   });
 });
